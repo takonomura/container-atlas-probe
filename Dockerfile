@@ -1,5 +1,5 @@
 ## builder
-FROM --platform=$BUILDPLATFORM debian:10-slim as builder
+FROM --platform=$BUILDPLATFORM docker.io/library/debian:buster-20230725-slim@sha256:cea311dfcd4ec8675f2857b4ddbe03de609580074adf99f4538672bd4478a2cd as builder
 LABEL image="ripe-atlas-builder"
 ARG BUILDPLATFORM
 ARG TARGETPLATFORM
@@ -41,7 +41,7 @@ LABEL image="ripe-atlas-artifacts"
 COPY --from=builder /root/atlasswprobe-*.deb /
 
 ## the actual image
-FROM debian:10-slim
+FROM docker.io/library/debian:buster-20230725-slim@sha256:cea311dfcd4ec8675f2857b4ddbe03de609580074adf99f4538672bd4478a2cd
 LABEL maintainer="dockerhub@public.swineson.me"
 LABEL image="ripe-atlas"
 ARG DEBIAN_FRONTEND=noninteractive
