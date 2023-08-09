@@ -5,6 +5,7 @@ ARG BUILDPLATFORM
 ARG TARGETPLATFORM
 ARG DEBIAN_FRONTEND=noninteractive
 ARG GIT_URL=https://github.com/RIPE-NCC/ripe-atlas-software-probe.git
+ARG PROBE_VERSION=5080
 
 WORKDIR /root
 
@@ -24,7 +25,7 @@ RUN if [ "$BUILDPLATFORM" != "$TARGETPLATFORM" ] ; then \
 	&& apt-get update -y \
 	&& apt-get install -y git tar fakeroot libssl-dev libcap2-bin autoconf automake libtool build-essential
 
-RUN git clone --recursive "$GIT_URL"
+RUN git clone --recursive "$GIT_URL" --branch "$PROBE_VERSION"
 
 RUN if [ "$BUILDPLATFORM" != "$TARGETPLATFORM" ] ; then \
 		. ./env \
